@@ -9,15 +9,40 @@
 </head>
 <body class="container">
 
-    <h1 class="mt-5">Acceso denegado</h1>
+    <h1 class="mt-5">Band Names Server</h1>
     <hr>
+
+    <p>
+          Service status:
+
+            <span id="#pOnline" className="text-success"> Online</span>
+    
+            <span id="#pOffline" className="text-danger"> Offline</span>
+        
+        </p>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js" integrity="sha512-vGcPDqyonHb0c11UofnOKdSAt5zYRpKI4ow+v6hat4i96b7nHSn8PQyk0sT5L9RECyksp+SztCPP6bqeeGaRKg==" crossorigin="anonymous"></script>
 
     <script>
-        // Conexión con el socket server
-        const socket = io('http://localhost:8080');
+        const onlineElement = document.getElementById('#pOnline')
+        const offlineElement = document.getElementById('#pOffline')
 
+
+        // Conexión con el socket server
+        const socket = io('https://weak-expensive-pediatrician.glitch.me/');
+        
+        socket.on("connect", () => {
+            console.log("connected")
+            offlineElement.style.display = 'none';
+            onlineElement.style.display = 'block';
+    });
+
+    //eso no aplica porque al desconectarse el servidor directamente la web no se muestra
+    socket.on("disconnect", () => {
+            console.log("disconnected")
+            offlineElement.style.display = 'block';
+            onlineElement.style.display = 'none';
+    });
         
         /// Para emitir
         // socket.emit('mensaje-to-server', { data });
