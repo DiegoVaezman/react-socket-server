@@ -1,3 +1,8 @@
+···· |||||||||
+···· |||||||
+···· ||||
+···· |||||||
+
 # Socket Server
 
 Este backend contiene todo lo necesario para configurar un servidor de express + socket.io.
